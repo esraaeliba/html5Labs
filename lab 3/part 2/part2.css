@@ -1,0 +1,13 @@
+button{
+    left: 644px;
+    top: 300px;
+    position: relative;
+    border-radius: 14px;
+    width: 200px;
+    height: 31px;
+}
+button:hover{
+    background-color: #f6ddee;
+    box-shadow: 3px 1px 10px 10px #d8e7fc;
+    border: 2px solid #857df7;
+}

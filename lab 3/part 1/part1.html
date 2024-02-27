@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="part1.css" rel="stylesheet">
+</head>
+<body>
+    <div>    
+        <label style="position: relative; top: 7px; left: 20px; font-size: 20px;">Change Email Address</label>
+        <br>
+        <input id="username" type="text" style=" position: relative; top: 15px; left: 20px;" placeholder="Username" >
+        <br>
+        <label id="usernameError" style=" position: relative; top: 17px; left: 20px; color: grey;"></label>
+        <br>
+        <input id="email" type="email"  style=" position: relative; top: 20px; left: 20px;" placeholder="Email">
+        <br>
+        <label id="emailError" style=" position: relative; top: 24px; left: 20px; color: grey;"></label>
+        <br>
+        <button onclick="validateForm()">Change</button>
+        <br>
+    </div>
+   <script>
+  
+// Function to validate form fields
+function validateForm(){
+    const usernameError = document.getElementById("usernameError");
+    const emailError = document.getElementById("emailError");
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+
+    const usernameRegex = new RegExp("\\d");
+
+    const emailRegex = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+
+    if (!username) {
+        usernameError.innerHTML = "The username field is required";
+    } else if (usernameRegex.test(username)) {
+        usernameError.innerHTML = "The required username may only be a series of alphabetical characters.";
+    } else {
+        usernameError.innerHTML = "";
+    }
+
+    if (!email) {
+        emailError.innerHTML = "The email field is required.";
+    } else if (!emailRegex.test(email)) {
+        emailError.innerHTML = "The required email address may not include any special characters other than the '@' sign.";
+    } else {
+        emailError.innerHTML = "";
+    }
+}
+document.getElementById("username").addEventListener("input", function() {
+    document.getElementById("usernameError").innerHTML = "";
+});
+
+document.getElementById("email").addEventListener("input", function() {
+    document.getElementById("emailError").innerHTML = "";
+});
+
+
+
+   </script>
+</body>
+</html>

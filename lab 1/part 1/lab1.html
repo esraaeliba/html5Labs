@@ -1,0 +1,105 @@
+<!DOCTYPE html> 
+<html> 
+<body> 
+
+<div style="text-align:center"> 
+  <button onclick="play()">PLAY</button> 
+  <button onclick="pause()">STOP</button> 
+
+  <button onclick="start()"><<</button>
+  <button onclick="back10seconds()"><</button>
+  <button onclick="forward10seconds()">></button>
+  <button onclick="end()">>></button>
+  <label> Volume</label>
+  <input id="vol-control" type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)" onchange="SetVolume(this.value)"></input>
+  <label> Speed</label>
+  <input id="speed-control" type="range" min="0.1" max="2" step="0.1" value="1" oninput="SetSpeed(this.value)" onchange="SetSpeed(this.value)"></input>
+  <button onclick="mute()">MUTE</button>
+  <button onclick="unMute()">UN Mute</button>
+
+
+
+ 
+
+  <br><br>
+  <video id="video1" width="420">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+</div> 
+<div style="    position: relative;
+left: 500px;">
+<input style="
+width: 500px;"id="duration-slider" type="range" min="0" value="0" step="1" onchange="seekVideo(this.value)">
+<!-- Timer showing current time in seconds -->
+<span id="timer">0</span>
+</div>
+<script> 
+var myVideo = document.getElementById("video1"); 
+var volu3 = document.getElementById('vol-control');
+var speedSlider = document.getElementById('speed-control');
+var player = document.getElementById('video1');
+var durationSlider = document.getElementById('duration-slider');
+var timer = document.getElementById('timer');
+
+function play() { 
+    myVideo.play(); 
+} 
+
+function pause() { 
+    myVideo.pause(); 
+} 
+
+function start() {
+    myVideo.currentTime = 0;
+}
+
+function end() {
+    myVideo.currentTime = myVideo.duration;
+}
+
+function forward10seconds() {
+    myVideo.currentTime += 2;
+    myVideo.play(); 
+}
+
+function back10seconds() {
+    myVideo.currentTime -= 2;
+    myVideo.play(); 
+}
+
+function SetVolume(val) {
+    var player = document.getElementById('video1');
+    player.volume = val / 100;
+}
+
+function SetSpeed(val) {
+    myVideo.playbackRate = parseFloat(val);
+}
+
+function mute(){
+        player.volume =0;
+}
+function unMute(){
+        player.volume =1;
+}
+
+function SetSpeed(val) {
+    myVideo.playbackRate = parseFloat(val);
+}
+
+function updateSliderAndTimer() {
+    durationSlider.max = myVideo.duration;
+    durationSlider.value = myVideo.currentTime;
+    timer.textContent = Math.floor(myVideo.currentTime);
+}
+
+// Event listener to update the slider and timer when the time changes
+myVideo.addEventListener('timeupdate', updateSliderAndTimer);
+
+function seekVideo(time) {
+    myVideo.currentTime = time;
+}
+</script> 
+
+</body> 
+</html>
